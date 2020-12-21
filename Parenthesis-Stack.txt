@@ -1,0 +1,34 @@
+# TC - O(n)
+# SC - O(n)
+# Ran on LC - Yes
+
+# Push open parenthesis onto stack
+# For close parenthesis, check if open is at the top. If yes, pop that, else return False
+# In the end, the stack must be empty
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        if not s: return True
+        stack = []
+        for i in range(len(s)):
+            if s[i] in '({[':
+                stack.append(s[i])
+            elif s[i] == ')':
+                if not stack: return False
+                if stack[-1] == '(':
+                    stack.pop()
+                else:
+                    return False
+            elif s[i] == '}':
+                if not stack: return False
+                if stack[-1] == '{':
+                    stack.pop()
+                else:
+                    return False
+            elif s[i] == ']':
+                if not stack: return False
+                if stack[-1] == '[':
+                    stack.pop()
+                else:
+                    return False
+        return len(stack) == 0
